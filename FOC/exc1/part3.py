@@ -51,9 +51,7 @@ class LetterTile:
 
 
 class GameBoard:
-    """ This class represents the gameboard itself.
-        You are requried to complete this class.*'.join(verTemp)
-    """
+
 
     def __init__(self,width,height):
         """ The constructor for setting up the gameboard """
@@ -66,6 +64,7 @@ class GameBoard:
             for i in range(width):
                 self.board[j].append('-')
 
+    # a function that takes either x and y locations of a tile or the tile and returns true if it's empty
     def is_empty(self,x=0,y=0,tile=None):
         if not tile:
             tile=self.board[y][x]
@@ -87,19 +86,24 @@ class GameBoard:
 
     def get_words(self):
         """ Returns a list of the words on the board sorted in alphabetic order."""
-        verTemp=['' for x in range(self.width) ]
+        verTemp=['*' for x in range(self.width) ]
         horTemp=''
+        #loops through board and records each sequence of letters seperating words by * symbol
         for j in range(self.height):
             horTemp=horTemp+'*'
             for i in range(self.width):
                 letter=self.board[j][i]
                 if self.is_empty(tile=letter):
+                    #if tile is empty add * to strings
                     horTemp=horTemp+'*'
                     verTemp[i]=verTemp[i]+'*'
                 else:
+                    #if letter add it to list of words
                     horTemp=horTemp+letter.get_letter()
                     verTemp[i]=verTemp[i]+letter.get_letter()
 
+        #join the columns of the vertical list seperating them by *
+        #split the strings on * and filter out words which are longer than one character
         verTemp=list(filter(lambda x: len(x)>1, '*'.join(verTemp).split('*')))
         horTemp=list(filter(lambda x: len(x)>1, horTemp.split('*')))
         words=verTemp+horTemp
@@ -114,6 +118,7 @@ class GameBoard:
         words=self.get_words()
         maxscore=0
         maxword=[]
+        #loop through list of words and count the score of each word then find maximum score
         for word in words:
             score=0
             for char in word:
@@ -121,8 +126,10 @@ class GameBoard:
                 score=score+letter.get_score()
                 if score>maxscore:
                     maxscore=score
+                    #if new max word found add to list
                     maxword=[word]
                 elif score==maxscore:
+                    #if maximum score so far is shared add word to list
                     maxword.append(word)
 
         return maxword
@@ -143,6 +150,7 @@ class GameBoard:
         """ Returns a count of all letters currently on the board """
         total=0
         for j in range(self.height):
+            #for each row count letters
             total=total+sum(1 for x in self.board[j] if not self.is_empty(tile=x))
         return total
 
@@ -166,15 +174,13 @@ if __name__ == "__main__":
 
     board.print_board()
     print("There are {} letters placed on the board.".format(board.letters_placed()))
-    print(board.get_words())
-    print(board.top_scoring_words())
 
-    # Uncomment below once you have implemented get_words
-    # print "=== Words ==="
-    # for word in board.get_words():
-    #     print(word)
+    #Uncomment below once you have implemented get_words
+    print( "=== Words ===")
+    for word in board.get_words():
+        print(word)
 
-    # Uncomment below once you have implmented top_scoring_words
-    # print "=== Top Scoring Words ==="
-    # for word in board.top_scoring_words():
-    #     print(word)
+    #Uncomment below once you have implmented top_scoring_words
+    print ("=== Top Scoring Words ===")
+    for word in board.top_scoring_words():
+        print(word)

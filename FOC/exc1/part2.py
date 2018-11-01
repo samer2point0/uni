@@ -12,29 +12,31 @@ class Point(Shape):
         self.y=y
     def __str__(self):
         return '('+str(self.x)+','+str(self.y)+')'
-    #do I need to deepcopy for setters?
+
+    #setters and getters
     def setX(self,x):
-        self.x=copy.deepcopy(x)
+        self.x=x
     def setY(self,y):
-        self.y =copy.deepcopy(y)
+        self.y =y
     def getX(self):
-        return copy.deepcopy(self.x)
+        return self.x
     def getY(self):
-        return copy.deepcopy(self.y)
+        return self.y
 
-    def equals(self,point):
+    def equals(self,point):#returns is differences in x and y are less than tolerance ?
         return (abs(self.x-point.x) <self.TOLERANCE and abs(self.y-point.y) <self.TOLERANCE)
-
-    def distance(self, point):
+    def distance(self, point):#calculates eucledian  between two points
         return ((self.x - point.x)**2 + (self.y - point.y)**2 )**0.5
 
 class Circle(Shape):
 
     def __init__(self,centre,radius):
-        self.centre=centre
+        self.centre=copy.deepcopy(centre)
         self.radius=radius
     def __str__(self):
         return 'This circle has its centre at '+ str(self.centre) +' and a radius of ' + str(self.radius)
+
+    #setters and getters using deepcopy when neccassary to avoid unintended alterations
     def setCentre(self, point):
         self.centre=copy.deepcopy(point)
     def setRadius(self, radius):
@@ -42,11 +44,11 @@ class Circle(Shape):
     def getCentre(self):
         return copy.deepcopy(self.centre)
     def getRadius(self):
-        return copy.deepcopy(self.radius)
+        return self.radius
 
     def area(self):
         return (self.radius**2)*math.pi
-
+    #checks if passed shape is equal, larger or smaller than calling circle and returns 0,1 and-1 respectively
     def compare(self,shape):
         if abs(self.area() - shape.area())< self.TOLERANCE:
             return 0
@@ -55,41 +57,44 @@ class Circle(Shape):
         else:
             return -1
 
-    def envelops(self,shape):
-        #test
+    def envelops(self,shape):# retrun true if calling circle envelops passed shape
         if isinstance(shape, Circle):
-            return (self.radius >= (self.centre.distance(shape.centre)+shape.radius) )
+            return (self.radius >= (self.centre.distance(shape.getCentre())+shape.getRadius()) )
         else:
-            #assuming square allign with x,y axes
-            furthestPoint=Point(shape.topLeft.getX()+shape.getLength(),shape.topLeft.getY()+shape.getLength())
-            return (self.radius >= self.centre.distance(furthestPoint))
+            #assuming square alligns with x,y axes find bottom right corner
+            envelopsTopLeft=(self.radius >= (self.centre.distance(shape.getTopLeft())))
+            envelopsBottomRight=(self.radius >= self.centre.distance(shape.getBottomRight()))
+            #if two diagonal corners are enveloped then return true
+            return (envelopsTopLeft and envelopsBottomRight)
 
-    def equals(self, circle):
-        return(self.centre.equals(circle.centre) and abs(self.radius - circle.radius)<self.TOLERANCE)
+    def equals(self, circle):#returns true if centre and radius are equal within tolerence
+        return(self.centre.equals(circle.getCentre()) and abs(self.radius - circle.getRadius())<self.TOLERANCE)
 
 class Square(Shape):
 
-    #what is actually passed to the constructor point object v (x,y)
     def __init__(self,top_left,length):
         self.topLeft=top_left
         self.length=length
+        self.bottomRight=Point(top_left.getX()+length, top_left.getY()-length)
     def __str__(self):
-        #test
         return 'This square\'s top left is at '+ str(self.topLeft) +' and the side length is ' + str(self.length)
+
+    #setters and getters using deepcopy when neccassary to avoid unintended alterations
     def setTopLeft(self, point):
         self.topLeft=copy.deepcopy(point)
     def setLength(self, length):
         self.length=length
     def getTopLeft(self):
-        return copy.deepcopy(self.TopLeft)
+        return copy.deepcopy(self.topLeft)
+    def getBottomRight(self):
+        return copy.deepcopy(self.bottomRight)
     def getLength(self):
-        return copy.deepcopy(self.length)
+        return self.length
 
     def area(self):
         return self.length**2
-
+    #checks if passed shape is equal, larger or smaller than calling circle and returns 0,1 and-1 respectively
     def compare(self,shape):
-        #test
         if abs(self.area() - shape.area())< self.TOLERANCE:
             return 0
         elif self.area()>shape.area():
@@ -97,25 +102,24 @@ class Square(Shape):
         else:
             return -1
 
-    def envelops(self,shape):
+    def envelops(self,shape):# retrun true if calling circle envelops passed shape
         if isinstance(shape, Square):
-            #double check
-            topLeftCondition= ((self.topLeft.getX() >= shape.topLeft.getX()) and (self.topLeft.getY() <= shape.topLeft.getY()))
-            lengthCondition= self.length >= shape.length + max((self.topLeft.getX() - shape.topLeft.getX()), (self.topLeft.getY() - shape.topLeft.getY()))
-            return topLeftCondition and lengthCondition
+            envelopsTopLeft= min((shape.topLeft.getX()-self.topLeft.getX()),(self.topLeft.getY()-shape.topLeft.getY())) >= 0
+            envelopsBottomRight= max((shape.bottomRight.getX()-self.bottomRight.getX()),(self.bottomRight.getY()-shape.bottomRight.getY())) <= 0
+            return envelopsTopLeft and envelopsBottomRight
         else:
-            minCentreToXEdge=min((shape.centre.getX()-self.topLeft.getX()),(self.topLeft.getX()-shape.centre.getX()+self.length))
-            minCentreToYEdge=min((shape.centre.getY()-(self.topLeft.getY()-self.length)),(self.topLeft.getY()-shape.centre.getY()))
-            #check if centre of circle is inside the square and if distance from edges of square to centre are all bigger than radius
-            return (minCentreToYEdge >= 0 and minCentreToYEdge >= shape.radius) and (minCentreToXEdge >= 0 and minCentreToXEdge >= shape.radius)
+            #find minimmum distance form center of circle to edges
+            minCentreToXEdge=min((shape.centre.getX()-self.topLeft.getX()),(self.bottomRight.getX()-shape.centre.getX()))
+            minCentreToYEdge=min((shape.centre.getY()-(self.bottomRight.getY()),(self.topLeft.getY()-shape.centre.getY())))
+            #if min centere to edges are positive then centre is within square area
+            #if distance from edges of square to centre are all bigger than radius of circle then circle is enveloped by square
+            return minCentreToYEdge >= shape.radius and minCentreToXEdge >= shape.radius
 
-    def equals(self, square):
-        return(self.topLeft.equals(square.topLeft) and abs(self.length - square.length)<self.TOLERANCE)
+    def equals(self, square):#returns true if centre and radius are equal within tolerence
+        return (self.topLeft.equals(square.topLeft) and abs(self.length - square.length)<self.TOLERANCE)
 
 
 class Assignment:
-
-
 
     def __init__(self): #initilising instance variables
         self.pointsList=[]
@@ -139,19 +143,19 @@ class Assignment:
             elif s[0]== 'square':
                 self.squaresList.append(s)
         #printing out statistics
-        print('the shapes count is: ', self.shape_count())
-        print('the circles count is: ', self.circle_count())
-        print('the squares count is: ', self.square_count())
-        print('the largest circle area is: ', self.max_circle_area())
-        print('the smallest circle area is: ', self.min_circle_area())
-        print('the largest square area is: ', self.max_square_area())
-        print('the smallest square area is: ', self.min_square_area())
-        print('the mean of circles area is: ', self.mean_circle_area())
-        print('the mean of squares area is: ', self.mean_square_area())
-        print('the standard deviation of circles area is: ', self.std_dev_circle_area())
-        print('the standrad deviation of squares area is: ', self.std_dev_square_area())
-        print('the median area of the circles is: ', self.median_circle_area())
-        print('the median area of the squares is: ', self.median_square_area())
+        print(self.shape_count())
+        print(self.circle_count())
+        print(self.square_count())
+        print(self.max_circle_area())
+        print(self.min_circle_area())
+        print(self.max_square_area())
+        print(self.min_square_area())
+        print(self.mean_circle_area())
+        print(self.mean_square_area())
+        print(self.std_dev_circle_area())
+        print(self.std_dev_square_area())
+        print(self.median_circle_area())
+        print(self.median_square_area())
 
     def shape_count(self):
         return len(self.squaresList)+len(self.circlesList)
@@ -164,38 +168,46 @@ class Assignment:
 
     def max_circle_area(self):
         maxr=0
+        #find circle with largest radius
         for c in self.circlesList:
             r=float(c[3])
             if r>maxr:
                 maxr=r
         circle=Circle(self.origin,maxr)
+        #return area of circle with largest radius
         return circle.area()
 
     def min_circle_area(self):
         minr=999999999
+        #find circle with smallest radius
         for c in self.circlesList:
             r=float(c[3])
             if r<minr:
                 minr=r
         circle=Circle(self.origin,minr)
+        #return area of circle with smallest radius
         return circle.area()
 
     def max_square_area(self):
         maxl=0
+        #find square with largest length
         for s in self.squaresList:
             l=float(s[3])
             if l>maxl:
                 maxl=l
         square=Square(self.origin,maxl)
+        #return area of square with largest radius
         return square.area()
 
     def min_square_area(self):
         minl=999999999
+        #find square with smallest length
         for s in self.squaresList:
             l=float(s[3])
             if l<minl:
                 minl=l
         square=Square(self.origin,minl)
+        #return area of square with smallest radius
         return square.area()
 
     def mean_circle_area(self):
@@ -237,16 +249,20 @@ class Assignment:
         return (sum/(len(self.squaresList)-1))**0.5
 
     def median_circle_area(self):
+        #sort list of circles by radius and then find median radius
         self.circlesList.sort(key=lambda x: x[3])
         medianLoc=math.floor(len(self.circlesList)/2)
         medianRadius=float(self.circlesList[medianLoc][3])
+        #return circle area of median circle
         circle=Circle(self.origin, medianRadius)
         return circle.area()
 
     def median_square_area(self):
+        #sort list of squares by radius and then find median radius
         self.squaresList.sort(key=lambda x: x[3])
         medianLoc=math.floor(len(self.squaresList)/2)
         medianLength=float(self.squaresList[medianLoc][3])
+        #return square area of median circle
         square=Square(self.origin, medianLength)
         return square.area()
 
@@ -265,7 +281,6 @@ class Test():
         assert self.p1.equals(p3)
         p3.setX(1)
         assert not self.p1.equals(p3)
-        print('point testing all good')
 
     def cTest(self):
         c3=copy.deepcopy(self.c1)
@@ -279,7 +294,6 @@ class Test():
         assert not self.c1.envelops(self.c2)
         assert self.c1.envelops(self.s1)
         assert not self.c1.envelops(self.s2)
-        print(str(self.c1),'\ncircle testing all good')
 
     def sTest(self):
         s3=copy.deepcopy(self.s1)
@@ -294,15 +308,14 @@ class Test():
         self.s2.setTopLeft(Point(-1,1))
         assert self.s2.envelops(self.c1)
         assert not self.s1.envelops(self.c1)
-        print(str(self.s1),'\nsquare testing all good')
 
 
 if __name__ == "__main__":
     #You should add your own code heere to test your work
     print ("=== Testing Part 2 ===")
     assignment = Assignment()
-    test=Test()
-    test.pTest()
-    test.cTest()
-    test.sTest()
+    #test=Test()
+    #test.pTest()
+    #test.cTest()
+    #test.sTest()
     assignment.analyse("1000shapetest.data")
