@@ -52,7 +52,7 @@ class LetterTile:
 
 class GameBoard:
     """ This class represents the gameboard itself.
-        You are requried to complete this class.
+        You are requried to complete this class.*'.join(verTemp)
     """
 
     def __init__(self,width,height):
@@ -66,7 +66,7 @@ class GameBoard:
             for i in range(width):
                 self.board[j].append('-')
 
-    def isEmpty(self,x=0,y=0,tile=None):
+    def is_empty(self,x=0,y=0,tile=None):
         if not tile:
             tile=self.board[y][x]
         return tile=='-'
@@ -87,32 +87,45 @@ class GameBoard:
 
     def get_words(self):
         """ Returns a list of the words on the board sorted in alphabetic order."""
-        verTemp=['' for x in range(self.width)]
-        words=[]
+        verTemp=['' for x in range(self.width) ]
+        horTemp=''
         for j in range(self.height):
-            horizTemp=''
+            horTemp=horTemp+'*'
             for i in range(self.width):
                 letter=self.board[j][i]
-                if self.isEmpty(tile=letter):
-                    verTemp[i]=verTemp[i]+'-'
-                    if len(horizTemp)>1:
-                        words.append(horizTemp)
-                        horizTemp=''
+                if self.is_empty(tile=letter):
+                    horTemp=horTemp+'*'
+                    verTemp[i]=verTemp[i]+'*'
                 else:
-                    horizTemp=horizTemp+letter.get_letter()
+                    horTemp=horTemp+letter.get_letter()
                     verTemp[i]=verTemp[i]+letter.get_letter()
 
-        # format such that words filer at the end
-        words.extend(verTemp)
-        return words.sort()
+        verTemp=list(filter(lambda x: len(x)>1, '*'.join(verTemp).split('*')))
+        horTemp=list(filter(lambda x: len(x)>1, horTemp.split('*')))
+        words=verTemp+horTemp
 
+        return sorted(words)
 
     def top_scoring_words(self):
         """ Returns a list of the top scoring words.
             If there is a single word, then the function should return a single item list.
             If multilpe words share the highest score, then the list should contain the words sorted alphabetically.
         """
-        pass #your code here
+        words=self.get_words()
+        maxscore=0
+        maxword=[]
+        for word in words:
+            score=0
+            for char in word:
+                letter=LetterTile(char)
+                score=score+letter.get_score()
+                if score>maxscore:
+                    maxscore=score
+                    maxword=[word]
+                elif score==maxscore:
+                    maxword.append(word)
+
+        return maxword
 
     def print_board(self):
         """ Prints a visual representation of the board
@@ -120,7 +133,7 @@ class GameBoard:
         """
         for j in range(self.height):
             for i in range(self.width):
-                if self.isEmpty(x=i,y=j):
+                if self.is_empty(x=i,y=j):
                     print( ' |', '-', end='')
                 else:
                     print(' |', self.board[j][i].get_letter(), end='')
@@ -130,7 +143,7 @@ class GameBoard:
         """ Returns a count of all letters currently on the board """
         total=0
         for j in range(self.height):
-            total=total+sum(1 for x in self.board[j] if not self.isEmpty(tile=x))
+            total=total+sum(1 for x in self.board[j] if not self.is_empty(tile=x))
         return total
 
 if __name__ == "__main__":
@@ -149,10 +162,12 @@ if __name__ == "__main__":
     board.set_tile(2,2,m)
     board.set_tile(2,3,o)
     board.set_tile(1,2,a)
+    board.set_tile(2,0,d)
 
     board.print_board()
     print("There are {} letters placed on the board.".format(board.letters_placed()))
     print(board.get_words())
+    print(board.top_scoring_words())
 
     # Uncomment below once you have implemented get_words
     # print "=== Words ==="
