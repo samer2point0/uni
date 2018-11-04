@@ -2,26 +2,14 @@ import re
 import jsonlines
 import nltk
 import os
-
+import collections
 nltk.download()
-
-os.system('rm ./text.txt')
-os.system('rm ./preptext.txt')
-os.system('touch ./text.txt')
-os.system('touch ./preptext.txt')
-TF=open('text.txt','r+')
-procTF=open('preptext.txt','r+')
 
 with open('./signal-news1/opinion-lexicon-English/positive-words.txt', 'r') as pWF:
     pWords=pWF.read().split()
-
 with open('./signal-news1/opinion-lexicon-English/negative-words.txt', 'r') as nWF:
     nWords=nWF.read().split()
 
-def readtextline(reader):
-    json=reader.read()
-    text=json['content']
-    return text
 
 def prep(text):
     urls=re.compile(r'http[\w\W]*\b')
@@ -30,7 +18,7 @@ def prep(text):
     text=nonalpha.sub('',text)
     num=re.compile(r'\b[0-9]+\b')
     text=num.sub('',text)
-    short=re.compile(r'\b[0-9a-z]{1,3}\b')
+    short=re.compile(r'\b[a-z]{1}\b')
     text=short.sub('',text)
     return text
 
@@ -38,14 +26,16 @@ def lemmatize(text):
     wnl=nltk.WordNetLemmatizer()
     return [wnl.lemmatize(word) for word in text]
 
-def posVneg(pnCount,artText):
+def pVn(pnCount,artText):
     PWs=0
     NWs=0
-    for word in artText:
-        if word in pWords:
-            PWs=PWs+1
-        elif word in nWords:
-            NWs=NWs+1
+    for word in pWords:
+        if word in artText:
+            PWs=PWs+artText[word]
+            del artText[word]
+    for word in nWords:
+        if word in artText:
+            NWs=NWs+artText[word]
 
     pnCount['pCount']=pnCount['pCount']+PWs
     pnCount['nCount']=pnCount['nCount']+NWs
@@ -56,33 +46,44 @@ def posVneg(pnCount,artText):
     return pnCount
 
 
-pnCount={'pArticles':0,'nArticles':0, 'pCount':0, 'nCount':0}
+pnCount={'pArticles':0,'nArticles':0, 'nCount':0, 'pCount':0}
+T,V=[],[]
+breakFlag=0
 with jsonlines.open('./signal-news1/signal-news1.jsonl', 'r') as reader:
+    i=0
     for line in reader:
+        i=i+1
         text=line['content'].lower()
 
+        #preocess text and lemmatize it and add it ot list
         proctext=prep(text).split()
+        del text
         lemT=lemmatize(proctext)
-        pnCount=posVneg(pnCount,lemT)
-        print('*')
-        #output to files
-        TF.write(text)
-        procTF.write(' '.join(lemT))
+        del proctext
 
-print('*****')
-TF.close()
-procTF.seek(0)
-T=procTF.read()
-procTF.close()
+        print(i)
+        T.extend(lemT)
+        if(i==160):
+            breakFlag=len(T)
 
-Tlist=T.split()
-del T, lemT, text
-tCount=len(Tlist)
-V=set(Tlist)
-vCount=len(V)
+        tempV=collections.Counter(lemT)
+        del lemT
+        pnCount=pVn(pnCount,tempV)
 
-trigram_measures= nltk.collocations.TrigramAssocMeasures()
-finder = nltk.TrigramCollocationFinder.from_words(Tlist)
-print(sorted(finder.nbest(trigram_measures.raw_freq, 25)))
-print(pnCount)
+        if(i==200):
+            break
+
+vCount=len(set(T))
+tCount=len(T)
 print(vCount, tCount)
+print(pnCount)
+
+V1=collections.Counter(T[:breakFlag])
+tri= collections.Counter(nltk.util.ngrams(T,3))
+
+topTri=sorted(tri.items(), key=lambda x: x[1])
+print(topTri[-25:])
+
+#sortedTri1=removeTri2(tri,tri2)
+
+V2=set(T2)
