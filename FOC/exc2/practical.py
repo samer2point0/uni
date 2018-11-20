@@ -1,14 +1,14 @@
 import itertools
 
-Code = {'.-':'A',      '-...': 'B',    '-.-.':'C',
-        '-..':'D',    '.':'E',      '..-.':'F',
-        '--.':'G',     '....':'H',   '..':'I',
-         '.---':'J',    '-.-':'K',     '.-..':'L',
-         '--':'M',      '-.':'N',      '---':'O',
-        '.--.':'P',   '--.-':'Q',   '.-.':'R',
-      	'...':'S',     '-':'T',       '..-':'U',
-        '...-':'V',   'W': '.--',     '-..-':'X',
-         '-.--':'Y',    '--..':'Z',
+Code = {'.-':'a',      '-...': 'b',    '-.-.':'c',
+        '-..':'d',    '.':'e',      '..-.':'f',
+        '--.':'g',     '....':'h',   '..':'i',
+         '.---':'j',    '-.-':'k',     '.-..':'l',
+         '--':'m',      '-.':'n',      '---':'o',
+        '.--.':'p',   '--.-':'q',   '.-.':'r',
+      	'...':'s',     '-':'t',       '..-':'u',
+        '...-':'v',    '.--':'w',     '-..-':'x',
+         '-.--':'y',    '--..':'z',
 
          '-----':'0',   '.----':'1',   '..---':'2',
         '...--':'3',   '....-':'4',   '.....':'5',
@@ -29,55 +29,55 @@ def morseDecode(inputStringList):
 	word=''
 	for char in inputStringList:
 		word=''.join([word, Code[char].lower()])
-
 	return word
 
 
 
 def morsePartialDecode(inputStringList):
-	"""
-	This method should take a list of strings as input. Each string is equivalent to one letter
-	(i.e. one morse code string). The entire list of strings represents a word.
+    dictionaryFileLoc ='./dictionary.txt'
+    Dict=[]
 
-	However, the first character of every morse code string is unknown (represented by an 'x' (lowercase))
-	For example, if the word was originally TEST, then the morse code list string would normally be:
-	['-','.','...','-']
+    with open(dictionaryFileLoc,'r') as DF:
+        for line in DF:
+            Dict.append(line.strip())
 
-	However, with the first characters missing, I would receive:
-	['x','x','x..','x']
+    Dict.sort()
+    lettersList=[]
+    #creates list of tuples with containing the possible letters for each morse code sequence
+    for pchar in inputStringList :
 
-	With the x unknown, this word could be TEST, but it could also be EESE or ETSE or ETST or EEDT or other permutations.
+        tempdot=pchar.replace('x', '.')
+        tempdash=pchar.replace('x', '-')
 
-	We define a valid words as one that exists within the dictionary file provided on the website, dictionary.txt
-	When using this file, please always use the location './dictionary.txt' and place it in the same directory as
-	the python script.
+        if tempdot in Code and tempdash in Code:
+            lettersList.append((Code[tempdot],Code[tempdash]))
+        elif tempdot in Code:
+            lettersList.append((Code[tempdot]))
+        elif tempdash in Code:
+            lettersList.append((Code[tempdash]))
+        else:
+            print('invalid char code')
 
-	This function should find and return a list of strings of all possible VALID words.
-	"""
-
-	dictionaryFileLoc = './dictionary.txt'
-	# Please complete this method to perform the above described function
-
-	Dict=[]
-	with open(dictionaryFileLoc,'r') as DF:
-		for word in DF:
-			Dict.append(word)
-
-	Dict.sort()
-
-	lettersList=[]
-	for pchar in inputStringList:
-		lettersList.append((Code[pchar.replace('x', '-')],Code[pchar.replace('x', '.')]))
-
-	print(lettersList)
-
+    print(lettersList)
+    #could also implement recursivly, complexity 2^n
+    tup=lettersList.pop()
+    wordList=[tup[0],tup[1]]
+    while lettersList != []:
+        #staring from last letter because more efficient
+        tup=lettersList.pop()
+        tempList=wordList.copy()
+        for word in tempList:
+            wordList.remove(word)
+            for i in range(len(tup)):
+                wordList.append(''.join([tup[i],word]))
 
 
-	for word in wordList:
-		if not word in Dict:
-			wordList.remove(word)
+    tempList=wordList.copy()
+    for word in tempList:
+        if not (word in Dict):
+            wordList.remove(word)
 
-	return wordList
+    return wordList
 
 
 class Maze:
