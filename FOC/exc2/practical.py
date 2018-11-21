@@ -81,45 +81,102 @@ def morsePartialDecode(inputStringList):
 
 
 class Maze:
-	def __init__(self):
-		"""
+    def __init__(self):
+        """
 		Constructor - You may modify this, but please do not add any extra parameters
 		"""
+        self.grid=[[1]]
+        self.opens=[]
 
-		pass
+    def addCoordinate(self,x,y,blockType):
+        """
+        Add information about a coordinate on the maze grid
+        x is the x coordinate
+        y is the y coordinate
+        blockType should be 0 (for an open space) of 1 (for a wall)
+        """
+        for j in range(len(self.grid)):
+            if y >= len(self.grid):
+                self.grid.append([1 for x in range(len(self.grid[0]))])
+            for i in range(x - len(self.grid[j])+1):
+                self.grid[j].append(1)
 
-	def addCoordinate(self,x,y,blockType):
-		"""
-		Add information about a coordinate on the maze grid
-		x is the x coordinate
-		y is the y coordinate
-		blockType should be 0 (for an open space) of 1 (for a wall)
-		"""
+        self.grid[y][x]=blockType
 
-		# Please complete this method to perform the above described function
-		pass
 
-	def printMaze(self):
-		"""
-		Print out an ascii representation of the maze.
-		A * indicates a wall and a empty space indicates an open space in the maze
-		"""
+    def printMaze(self):
+        """
+        Print out an ascii representation of the maze.
+        A * indicates a wall and a empty space indicates an open space in the maze
+        """
+        for y in range(len(self.grid)):
+            for x in range(len(self.grid[0])):
+                if self.grid[y][x]==0:
+                    print(' ', end='')
+                else:
+                    print('*',end='')
+            print('\n')
 
-		# Please complete this method to perform the above described function
-		pass
 
-	def findRoute(self,x1,y1,x2,y2):
-		"""
-		This method should find a route, traversing open spaces, from the coordinates (x1,y1) to (x2,y2)
-		It should return the list of traversed coordinates followed along this route as a list of tuples (x,y),
-		in the order in which the coordinates must be followed
-		If no route is found, return an empty list
-		"""
-		pass
+    def open(self):
+        for y in range(len(self.grid)):
+            for x in range(len(self.grid[0])):
+                if self.grid[y][x]==0:
+                    self.opens.append((x,y))
+
+
+    def findMove(self, route,pos, goal):
+        x,y=pos[0],pos[1]
+        Move=None
+        allmovesList=[(x-1,y),(x+1,y),(x,y-1),(x,y+1)]
+        allmovesList=list(filter(lambda x: x in self.opens, allmovesList))
+
+        choice=list(filter(lambda x: not x in route, allmovesList))
+
+        if goal in allmovesList:
+            return goal
+        elif choice:
+            return choice.pop()
+        else:
+            return (x,y)
+
+
+    def findRoute(self,x1,y1,x2,y2):
+        """
+        This method should find a route, traversing open spaces, from the coordinates (x1,y1) to (x2,y2)
+        It should return the list of traversed coordinates followed along this route as a list of tuples (x,y),
+        in the order in which the coordinates must be followed
+        If no route is found, return an empty list
+        """
+        move=(x1,y1)
+        route=[move]
+        self.open()
+        #depth first search
+        i=0
+        while True:
+            i=i+1
+            x,y=move[0],move[1]
+            move=self.findMove(route,(x,y),(x2,y2))
+            if move==(x2,y2):
+                route.append(move)
+                break
+            elif move==(x,y):
+                route.remove(move)
+                self.opens.remove(move)
+                move=route[-1]
+            else:
+                route.append(move)
+
+
+            if i > 2*len(self.grid)*len(self.grid[0]):
+                print(route)
+                return []
+
+        return route
+
 
 def morseCodeTest():
 	"""
-	This test program passes the morse code as a list of strings for the word
 	HELLO to the decode method. It should receive a string "HELLO" in return.
 	This is provided as a simple test example, but by no means covers all possibilities, and you should
 	fulfill the methods as described in their comments.
@@ -129,7 +186,6 @@ def morseCodeTest():
 	print(morseDecode(hello))
 
 def partialMorseCodeTest():
-
 	"""
 	This test program passes the partial morse code as a list of strings
 	to the morsePartialDecode method. This is provided as a simple test example, but by
@@ -144,43 +200,48 @@ def partialMorseCodeTest():
 	dance = ['x..','x-','x.','x.-.','x']
 	print(morsePartialDecode(dance))
 
+
 def mazeTest():
-	"""
-	This sets the open space coordinates for the example
-	maze in the assignment.
-	The remainder of coordinates within the max bounds of these specified coordinates
-	are assumed to be walls
-	"""
-	myMaze = Maze()
-	myMaze.addCoordinate(1,0,0)
-	myMaze.addCoordinate(1,1,0)
-	myMaze.addCoordinate(7,1,0)
-	myMaze.addCoordinate(1,2,0)
-	myMaze.addCoordinate(2,2,0)
-	myMaze.addCoordinate(3,2,0)
-	myMaze.addCoordinate(4,2,0)
-	myMaze.addCoordinate(6,2,0)
-	myMaze.addCoordinate(7,2,0)
-	myMaze.addCoordinate(4,3,0)
-	myMaze.addCoordinate(7,3,0)
-	myMaze.addCoordinate(4,4,0)
-	myMaze.addCoordinate(7,4,0)
-	myMaze.addCoordinate(3,5,0)
-	myMaze.addCoordinate(4,5,0)
-	myMaze.addCoordinate(7,5,0)
-	myMaze.addCoordinate(1,6,0)
-	myMaze.addCoordinate(2,6,0)
-	myMaze.addCoordinate(3,6,0)
-	myMaze.addCoordinate(4,6,0)
-	myMaze.addCoordinate(5,6,0)
-	myMaze.addCoordinate(6,6,0)
-	myMaze.addCoordinate(7,6,0)
-	myMaze.addCoordinate(5,7,0)
+    """
+    This sets the open space coordinates for the example
+    maze in the assignment.
+    The remainder of coordinates within the max bounds of these specified coordinates
+    are assumed to be walls
+    """
+    myMaze = Maze()
+    myMaze.addCoordinate(1,0,0)
+    myMaze.addCoordinate(1,1,0)
+    myMaze.addCoordinate(7,1,0)
+    myMaze.addCoordinate(1,2,0)
+    myMaze.addCoordinate(2,2,0)
+    myMaze.addCoordinate(3,2,0)
+    myMaze.addCoordinate(4,2,0)
+    myMaze.addCoordinate(6,2,0)
+    myMaze.addCoordinate(7,2,0)
+    myMaze.addCoordinate(4,3,0)
+    myMaze.addCoordinate(7,3,0)
+    myMaze.addCoordinate(4,4,0)
+    myMaze.addCoordinate(7,4,0)
+    myMaze.addCoordinate(3,5,0)
+    myMaze.addCoordinate(4,5,0)
+    myMaze.addCoordinate(7,5,0)
+    myMaze.addCoordinate(1,6,0)
+    myMaze.addCoordinate(2,6,0)
+    myMaze.addCoordinate(3,6,0)
+    myMaze.addCoordinate(4,6,0)
+    myMaze.addCoordinate(5,6,0)
+    myMaze.addCoordinate(6,6,0)
+    myMaze.addCoordinate(7,6,0)
+    myMaze.addCoordinate(5,7,0)
+
+
+    myMaze.printMaze()
+    print(myMaze.findRoute(5,7,1,0))
 
 def main():
 	morseCodeTest()
 	partialMorseCodeTest()
-	#mazeTest()
+	mazeTest()
 
 if(__name__ == "__main__"):
 	main()
