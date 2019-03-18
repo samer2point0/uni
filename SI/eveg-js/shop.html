@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+  <head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="model.js"></script>
+    <style>
+      header::after {content: ''; display:table; clear: both}
+      ul li {display: inline; font-size: 20px;font-family: verdana; position: relative;margin-right: 140px}
+      ul a {color: black; text-decoration:none;}
+      ul a:hover {color: grey}
+      ul a:before {content: ''; background-color: black; height: 3px;position:absolute;top:0;width:0%;}
+      ul a:hover::before {width: 100%;top: 0px}
+
+      input[type="button"]{color: black;background-color: white;}
+      input[type="button"]:hover{background-color:black; color:white}
+    </style>
+  </head>
+  <body>
+    <!--
+    images same size
+    swap images to the other side
+    make names larger
+    highlight buttons
+  -->
+  <header  >
+  <div style="width: 100%; ">
+    <img src="img\logo.jpg" alt="logo" style=" width: 10%; height: 20%; float: left;padding-top: 10px; margin-left: 20px ">
+    <nav style="float: right;">
+      <ul style=" list-style: none;width:100%;padding-top: 40px">
+          <li><a href="eveg.html">Home </a></li>
+          <li style="padding-right: 50px; padding-bottom: 12px"><a class="current" href="shop.html" style="color:grey;background-color: black; height: 3px; position:absolute;">Shop </a></li>
+          <li ><a href="basket.html" >Basket</a></li>
+          <li ><a  href="order.html">Order</a></li>
+          <li><a href="invoice.html">Invoice</a> </li>
+      </ul>
+    </nav>
+  </div>
+  </header>
+
+  <div style="position: fixed; top:120px; left: 50px; width: 70%;height:90%;overflow: scroll">
+      <form>
+          <script>
+            var basket = readBasket();
+            var productDetails = getProductDetails();
+            for (var product in productDetails) {
+                document.write('<div style= "float:left; margin:15px;border:3px solid black; border-radius:10px; padding:8px">')
+                document.write('<h2 style="font-size:20px; font-weight:bold ;text-align:center">' + productDetails[product]["name"] + '<br>\n');
+                document.write(' <img src="img/' + productDetails[product]["image"] + '" width="200" height="150" style="padding: 10px; border-bottom:1px solid black; margin:5px" /><br>\n');
+                document.write('&pound' + productDetails[product]["price"] + '/\n');
+                document.write('' + productDetails[product]["units"] + '\n<br>');
+                document.write('<input name="' + product + '" id="' + product + '" type="text" value="' + basket[product] + '" style="width: 50px; height:20px;margin:5px;padding-right:15px;text-align:center" />\n');
+                document.write('         <input name="add' + product + '" type="button" value="Add to basket" onclick="javascript:addToBasket(\'' + product + '\', document.getElementById(\'' + product + '\').value)" style="transition:0.2s; font-size:20px;border-radius:5px;float:right;border:2px solid black;margin:5px;cursor:pointer"/>\n');
+                document.write('</div>')
+            }
+          </script>
+      </form>
+  </div>
+
+    <div style="position: fixed; bottom: 30%; right: 100px; ; height: 50px;">
+      <form>
+        <input type="button" name="exit" value="Exit" onclick="window.location.href='eveg.html'" style="transition:0.2s;font-size:30px; border-radius:7px;float:left;border:3px solid black;margin:10px;padding:8px;cursor:pointer" />
+        <input type="button" name="viewbasket" value="View Basket" onclick="window.location.href='basket.html'" style="transition:0.2s;font-size:30px; border-radius:7px;float:left;border:3px solid black;margin:10px;padding:8px;cursor:pointer" />
+      </form>
+    </div>
+  </body>
+</html>
