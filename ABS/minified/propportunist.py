@@ -1,0 +1,189 @@
+import socket
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEXV=object
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEVR=None
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEVX=False
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXRE=set
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXRV=len
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXER=any
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV=print
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXVR=ValueError
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXVE=input
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE=int
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRX=range
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVER=str
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVEX=IOError
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVXR=True
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVXE=pow
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjERV=socket.SOCK_STREAM
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjRVX=socket.socket
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjERX=socket.AF_INET
+import random
+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEXR='AuctionClient'
+class WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjRVE(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEXV):
+ def __init__(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX,host="localhost",port=8020,mybidderid=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEVR,verbose=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEVX):
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose=verbose
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjRVX(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjERX,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjERV)
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock.connect((host,port))
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXE=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXRE(""" '".,;:{}[]()""")
+  if mybidderid:
+   if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXRV(mybidderid)==0 or WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXER((c in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXE)for c in mybidderid):
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("""mybidderid cannot contain spaces or any of the following: '".,;:{}[]()!""")
+    raise WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXVR
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.mybidderid=mybidderid
+  else:
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.mybidderid=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXVE("Input team / player name : ").strip()
+   while WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXRV(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.mybidderid)==0 or WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXER((c in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXE)for c in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.mybidderid):
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.mybidderid=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXVE("""You input an empty string or included a space  or one of these '".,;:{}[]() in your name which is not allowed (_ or / are all allowed)\n for example Emil_And_Nischal is okay\nInput team / player name: """).strip()
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock.send(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.mybidderid.encode("utf-8"))
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVE=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock.recv(5024).decode('utf_8')
+  x=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVE.split(" ")
+  if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Have received response of %s"%' '.join(x))
+  if(x[0]!="Not" and WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXRV(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVE)!=0):
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numberbidders=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[0])
+   if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Number of bidders: %d"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numberbidders)
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numtypes=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[1])
+   if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Number of types: %d"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numtypes)
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numitems=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[2])
+   if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Items in auction: %d"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numitems)
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.maxbudget=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[3])
+   if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Budget: %d"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.maxbudget)
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.neededtowin=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[4])
+   if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Needed to win: %d"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.neededtowin)
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.order_known="True"==x[5]
+   if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Order known: %s"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.order_known)
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.auctionlist=[]
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.winnerpays=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[6])
+   if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Winner pays: %d"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.winnerpays)
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.values={}
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.artists={}
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVX=7
+   if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.neededtowin>0:
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.values=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEVR
+    for i in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRX(7,7+(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numtypes*2),2):
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.artists[x[i]]=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[i+1])
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVX+=2
+    if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Item types: %s"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVER(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.artists))
+   else:
+    for i in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRX(7,7+(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numtypes*3),3):
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.artists[x[i]]=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[i+1])
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.values[x[i]]=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[i+2])
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVX+=3
+    if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Item types: %s"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVER(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.artists))
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Values: %s"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVER(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.values))
+   if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.order_known:
+    for i in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRX(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVX,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVX+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numitems):
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.auctionlist.append(x[i])
+    if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Auction order: %s"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVER(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.auctionlist))
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock.send('connected '.encode("utf-8"))
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVE=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock.recv(5024).decode('utf_8')
+  x=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVE.split(" ")
+  if x[0]!='players':
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Did not receive list of players!")
+   raise WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVEX
+  if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXRV(x)!=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numberbidders+2:
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Length of list of players received does not match numberbidders!")
+   raise WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVEX
+  if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("List of players: %s"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVER(' '.join(x[1:])))
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.players=[]
+  for WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREjX in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRX(1,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numberbidders+1):
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.players.append(x[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREjX])
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock.send('ready '.encode("utf-8"))
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.standings={WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREjV:{WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXj:0 for WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXj in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.artists}for WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREjV in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.players}
+  for WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREjV in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.players:
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREjV]["money"]=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.maxbudget
+ def WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVEX(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX):
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV=[]
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj=[]
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVX=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEVX
+  while not WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVX:
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVE=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock.recv(5024).decode('utf_8')
+   x=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVE.split(" ")
+   if x[0]!="done":
+    if x[0]=="selling":
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXjE=x[1]
+     if not WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.order_known:
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.auctionlist.append(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXjE)
+     if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Item on sale is %s"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXjE)
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXjV=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVXj(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.numberbidders,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.neededtowin,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.artists,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.values,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXRV(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV),WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.auctionlist,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.mybidderid,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.players,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.standings,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.winnerpays)
+     if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Bidding: %d"%WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXjV)
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock.send(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVER(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXjV).encode("utf-8"))
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVE=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock.recv(5024).decode('utf_8')
+     x=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjVE.split(" ")
+     if x[0]=="draw":
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV.append(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEVR)
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj.append(0)
+     if x[0]=="winner":
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV.append(x[1])
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj.append(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[3]))
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.standings[x[1]][WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXjE]+=1
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.standings[x[1]]["money"]-=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(x[3])
+   else:
+    WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVX=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVXR
+    if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.verbose:
+     if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.mybidderid in x[1:-1]:
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("I won! Hooray!")
+     else:
+      WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjXEV("Well, better luck next time...")
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.sock.close()
+ def WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVXj(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX,numberbidders,wincondition,artists,values,rd,itemsinauction,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV,players,standings,winnerpays):
+  if(wincondition>0)and(winnerpays==0)and WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.order_known:
+   return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjREX(numberbidders,wincondition,artists,values,rd,itemsinauction,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV,players,standings,winnerpays)
+  if(wincondition>0)and(winnerpays==0)and not WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.order_known:
+   return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjREV(numberbidders,wincondition,artists,values,rd,itemsinauction,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV,players,standings,winnerpays)
+  if(wincondition==0)and(winnerpays==0)and WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.order_known:
+   return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjRXE(numberbidders,wincondition,artists,values,rd,itemsinauction,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV,players,standings,winnerpays)
+  if(wincondition==0)and(winnerpays==1)and WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.order_known:
+   return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjRXV(numberbidders,wincondition,artists,values,rd,itemsinauction,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV,players,standings,winnerpays)
+  return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVXE(standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV]['money'])
+ def WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVXE(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXEj):
+  return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXEj*WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjEXR()+1)
+ def WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjREX(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX,numberbidders,wincondition,artists,values,rd,itemsinauction,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV,players,standings,winnerpays):
+  WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXEj=standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV]['money']
+  if('rand' in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV):
+   return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVXE(standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV]['money'])
+  if('pay200' in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV):
+   return 200
+  if('sticky' in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV):
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXj=itemsinauction[rd]
+   if(standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV][WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXj]>0)or not WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV:
+    return 200
+   else:
+    return 0
+  if('prop' in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV):
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXj=itemsinauction[rd]
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXEj=standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV]['money']
+   if(standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV][WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXj]==4):
+    return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXEj
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXEV=0.95
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXVj=itemsinauction[rd:]
+   i,j=0,0
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXVE=5-standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV][WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXj]
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVjE=0
+   WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVjX=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXVj.count(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXj)
+   for WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVEj in WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXVj:
+    if WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVEj==WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXj:
+     WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVjE=WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVRE(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVjE+WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjVXE(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXEV,i)*WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXEj/WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRXVE)
+     j=j+1
+    i=i+1
+   return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVjE
+ def WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjREV(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX,numberbidders,wincondition,artists,values,rd,itemsinauction,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV,players,standings,winnerpays):
+  return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVXE(standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV]['money'])
+ def WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjRXE(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX,numberbidders,wincondition,artists,values,rd,itemsinauction,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV,players,standings,winnerpays):
+  return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVXE(standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV]['money'])
+ def WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCjRXV(WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX,numberbidders,wincondition,artists,values,rd,itemsinauction,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREXV,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCREVj,WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV,players,standings,winnerpays):
+  return WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjEX.WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRVXE(standings[WpJTtPgKOhSnNGlbDzyBkmvruUFQYxqwLafiMIeHcsAodCRjXV]['money'])
+# Created by pyminifier (https://github.com/liftoff/pyminifier)

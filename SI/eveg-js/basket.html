@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+  <head >
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="model.js"></script>
+  <style>
+    header::after {content: ''; display:table; clear: both}
+    ul li {display: inline; font-size: 20px;font-family: verdana; position: relative;margin-right: 140px} 
+    ul a {color: black; text-decoration:none;}
+    ul a:hover {color: grey}
+    ul a:before {content: ''; background-color: black; height: 3px;position:absolute;top:0;width:0%;}
+    ul a:hover::before {width: 100%;top: 0px}
+
+  </style>
+  </head>
+
+ <body style=" font-family: verdana;background-color: #f8f8e8 ">
+<header  >
+<div style="width: 100%; ">
+  <img src="img\logo.png" alt="logo" style=" width: 10%; height: 20%; float: left;padding-top: 10px; margin-left: 20px ">
+  <nav style="float: right;">
+    <ul style=" list-style: none;width:100%;padding-top: 40px">
+        <li><a href="eveg.html">Home </a></li>
+        <li><a href="shop.html">Shop </a></li>
+        <li style="padding-right: 50px; padding-bottom: 12px"><a class="current" href="basket.html" style="color:grey;background-color: black; height: 3px; position:absolute;">Basket</a></li>
+        <li ><a  href="order.html">Order</a></li>
+        <li><a href="invoice.html">Invoice</a> </li>
+    </ul>
+  </nav>
+</div>
+</header>
+
+<div style="position: fixed; top:120px; left: 50px; width: 60%;height:80%;overflow: scroll;">
+    <form>
+       <h1 style="text-align:center;font-family:verdana; font-size: 30px">Your Basket Items</h1>
+        <script>
+          var basket = readBasket();
+          var productDetails = getProductDetails();
+          for (var product in productDetails) {
+            if (basket[product] > 0) {
+
+              document.write('<div style= "float:left; margin:15px;border:0px solid black; border-radius:10px; padding:5px;background-color: white">')
+
+              document.write('<h2 style="font-size:20px; font-weight:bold ;text-align:center">' + productDetails[product]["name"] + '<br>\n');
+              document.write(' <img src="img/' + productDetails[product]["image"] + '" width="200" height="150" style="padding: 10px; border-bottom:1px solid black; margin:5px" /><br>\n');
+              document.write('&pound' + productDetails[product]["price"] + '/\n');
+              document.write('' + productDetails[product]["units"] + '\n<br>');
+              document.write('<input name="' + product + '" id="' + product + '" type="text" value="' + basket[product] + '" style="width: 50px; height:20px;margin:5px;padding-right:15px;text-align:center" />\n');
+              document.write('         <input name="change' + product + '" type="button" value="change quantity" onclick="javascript:changeProductQuantity(\'' + product + '\', document.getElementById(\'' + product + '\').value)" style=" font-size:15px;background-color: white;border-radius:5px; border-color: black;float:right;border-bottom:1px solid black;margin:5px;cursor:pointer"/>\n');
+              document.write('</div>')
+            }
+          }
+        </script>
+    </form>
+</div>
+
+<div style="position: fixed; padding-top: 100px; right: 50px; height: 50px; width: 30%">
+      <h2 style="text-align: center; font-family:verdana"> Invoice Summary </h2>
+      <h3 style="font-style: italic; font-size: 20px "> Total </h3>
+        <script>
+          var totals = calculateTotals();
+          document.write('<p style="font-size:15px; "> ex. VAT '+ "&nbsp;&nbsp;&nbsp"+ '&pound'+parseFloat(totals["totalnovat"]).toFixed(2) +'<br>'+' VAT ' +"&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp"+ '&pound'+ parseFloat(totals["vat"]).toFixed(2) + '<br>'+ ' inc. VAT  ' + "&nbsp;&nbsp"+ '&pound'+parseFloat(totals["total"]).toFixed(2)+'</p>\n'
+            );
+        </script>
+</div>    
+
+<div style="position: fixed; padding-top: 300px; right: 50px; height: 50px; width: 30%;">
+    <form>
+        <input type="button" name="continue" value="Update Basket" onclick="self.close();" style="font-size:20px; background-color: white;border-radius:5px; border-color: black;  width:180px;cursor:pointer" />
+        <input type="button" name="clearbasket" value="Clear Basket" onclick="javascript:createEmptyBasket();self.close();" style="font-size:20px; background-color: white;border-radius:5px; width:180px;border-color: black; cursor:pointer;" />
+        <input type="button" name="order" value="Continue to Checkout" onclick="window.open('order.html');self.close();" style=" font-size:20px; background-color: white;border-radius:5px; border-color: black; width:250px;
+        cursor:pointer;" />
+      </form>
+</div>
+
+  
+  </body>
+</html>
